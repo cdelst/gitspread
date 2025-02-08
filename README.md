@@ -3,6 +3,22 @@
 
 This repository contains a shell script named `gitspread.sh` that spreads commits on a branch to new branches, rebased against main. This script is designed to speed up developer workflow for non-dependent stacked commits, while making PR reviews easier to manage.
 
+### Some example trees: 
+
+#### Stacked changes
+Classic stacked branches/commits: 
+
+![image](https://github.com/user-attachments/assets/0df7e057-d7c1-4a35-aa4f-039e415dd04f)
+
+Each successive branch depends on all the previous ones, so it's important to merge these in order.  This is best used for incrementally building a single change or related set of changes.
+
+#### Independent changes
+Often times independent changes are added to the same branch for convenience or laziness.  With `gitspread` you can decide later what is dependent and independent and make new branches based off of main with only those commits.  
+
+![image](https://github.com/user-attachments/assets/f4c6421e-8c3a-4c05-872b-468fc77d7158)
+
+
+
 ## Installation
 
 To install and use this script, follow these steps:
