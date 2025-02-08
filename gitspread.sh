@@ -84,6 +84,18 @@ function split_commits_to_branches() {
             # Push the new branch to the remote repository
             git push origin "$branch_name"
 
+            # Optionally delete the commit from the old branch
+            echo "Do you want to delete the commit from the original branch? (y/n)"
+            read -n 1 -r delete_commit < /dev/tty
+
+            if [[ "$delete_commit" == "y" || "$delete_commit" == "Y" ]]; then
+                git checkout "$original_branch"
+
+                # Remove the commit using a rebase
+                git rebase --autostash --onto "$commit_hash"^ "$commit_hash"
+                git push origin "$original_branch" --force
+            fi
+
             # Optionally, create a pull request using a CLI tool like GitHub CLI
             # Uncomment the line below if you have GitHub CLI installed
             # gh pr create --base main --head "$branch_name" --title "$commit_message"
